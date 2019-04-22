@@ -24,12 +24,17 @@
  *    MK I: LEDs illuminated all the time.
  *    
  *    MK II: Incorporate flex sensors to serve as on/off control of the lights.
+ *    
+ *    4/21/19
+ *      First on-glove test; re-arranged order of colors to match wiring:
+ *        existing order: purple / blue / red / orange / green / yellow
+ *        new order: yellow / green / purple / blue / red / orange
  */
 
 #include <FastLED.h>
 
-#define NUM_LEDS      6
-#define LED_PIN       2
+#define NUM_LEDS      6//11
+#define LED_PIN       11
 #define COLOR_ORDER   GRB
 
 // color table
@@ -74,9 +79,9 @@
 
 CRGB leds[NUM_LEDS];
 
-const unsigned int red[6] = {PURPLE_R,BLUE_R,RED_R,ORANGE_R,GREEN_R,YELLOW_R};
-const unsigned int green[6] = {PURPLE_G,BLUE_G,RED_G,ORANGE_G,GREEN_G,YELLOW_G};
-const unsigned int blue[6] = {PURPLE_B,BLUE_B,RED_B,ORANGE_B,GREEN_B,YELLOW_B};
+const unsigned int red[6] = {YELLOW_R,GREEN_R,PURPLE_R,BLUE_R,RED_R,ORANGE_R};
+const unsigned int green[6] = {YELLOW_G,GREEN_G,PURPLE_G,BLUE_G,RED_G,ORANGE_G};
+const unsigned int blue[6] = {YELLOW_B,GREEN_B,PURPLE_B,BLUE_B,RED_B,ORANGE_B};
 
 void setup() {
 
@@ -86,12 +91,16 @@ void setup() {
   FastLED.addLeds<WS2812, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS);
 
   set_leds(PURPLE_LED | BLUE_LED | RED_LED | ORANGE_LED | GREEN_LED | YELLOW_LED);
+  //leds[0] = CRGB(RED_R, RED_G, RED_B);
 
   FastLED.show();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  delay(1000);
+  FastLED.show();
 
   // TODO: MK II... read analog inputs and use set_leds() function to set outputs accordingly.
 }
